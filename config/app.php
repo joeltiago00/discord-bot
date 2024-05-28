@@ -1,5 +1,8 @@
 <?php
 
+
+use Bot\CoreDomain\Infrastructure\Providers\CoreProvider;
+
 return [
 
     /*
@@ -68,6 +71,7 @@ return [
 
     'providers' => [
         App\Providers\BotServiceProvider::class,
+        CoreProvider::class
     ],
 
 ];

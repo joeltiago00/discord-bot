@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace Bot\User\Infrastructure\Models;
 
-use Bot\CoreDomain\Infrastructure\Traits\Entity\HasEntity;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Bot\CoreDomain\Infrastructure\Traits\Entity\HasEntity;
+use Bot\User\Domain\Entities\User as UserEntity;
 
 class User extends Model
 {
-    use HasApiTokens, HasEntity;
+    use SoftDeletes, HasEntity;
 
     protected $table = 'users';
 
-    protected string $baseEntity = 'TransactionEntity::class';
+    protected string $baseEntity = UserEntity::class;
 
     protected $fillable = [
         'username',
@@ -26,7 +27,7 @@ class User extends Model
         'is_admin' => 'boolean',
     ];
 
-    public function getHighlightAttribute()
+    public function getHighlightAttribute(): string
     {
         return "<@{$this->discord_id}>";
     }
